@@ -1,0 +1,6 @@
+Name,Answer1,Thoughts
+Piyush,0,नमस्ते आप कैसे हैं। मैं सब ठीक हूँ
+Bharagava,1,হ্नमस्ते आप कैसे हैं
+Praghati,2,Hello How are you doing
+Alekhya,2,হ্नमस्ते आप कैसे हैं
+Rushabh,1,হ্যালো, আপনি কেমন আছেন. আমি ভাল আছি

@@ -1,0 +1,6 @@
+Name,Answer1,Thoughts,
+Piyush,0,Hello. How are you. I'm all right,
+Bhargava,1,Hello how are you,
+Prague,2,Hello How are you doing,
+Record,2,Hello how are you,
+Rushabh,1,Hello,How are you I'm fine,
