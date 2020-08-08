@@ -1,8 +1,8 @@
 from googletrans import Translator
 import csv
 
-input_file=open("sample_input.txt","r", encoding="utf8")
-output_file=open("sample_output.txt","a", encoding="utf8")
+input_file=open("sample_input_anylanguagetoenglish.txt","r", encoding="utf8")
+output_file=open("sample_output_anylanguagetoenglish.txt","a", encoding="utf8")
 
 for row in input_file:
     col=row.split(",")
