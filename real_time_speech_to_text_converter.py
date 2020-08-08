@@ -1,4 +1,5 @@
 import speech_recognition as sr
+from googletrans import Translator
 
 temp=sr.Recognizer()
 with sr.Microphone() as source:
@@ -7,7 +8,8 @@ with sr.Microphone() as source:
     print('Done')
     
 text=temp.recognize_google(audio)
+speech_trans=Translator()
+translated_output=speech_trans.translate(text,dest='en')
 
-print(text)
+print(translated_output.text)
 print("Text Printed!")
-print(temp.recognize_google(audio))
