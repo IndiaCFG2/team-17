@@ -8,10 +8,12 @@
           <p class="lead">{{ question.question_text }}</p>
           <a href="{% url 'polls:detail' question.id %}" class="btn btn-primary btn-sm">Answer Now</a>
           <a href="{% url 'polls:results' question.id %}" class="btn btn-secondary btn-sm">Results</a>
+          <button onclick="sample()" >sample</button>
         </div>
       </div>
     {% endfor %}
   {% else %}
     <p>No polls available</p>
   {% endif %}
+  
 {% endblock %}

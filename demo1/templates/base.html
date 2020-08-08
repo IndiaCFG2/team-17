@@ -11,6 +11,23 @@
       crossorigin="anonymous"
     />
     <title>Pollster {% block title %}{% endblock %}</title>
+    <script>
+  function sample(){
+
+    var data = new FormData();
+    data.append( "answer", 'नमस्ते आप कैसे हैं' );
+
+
+    alert('hi');
+    fetch('/polls/ace', {
+    method: 'post',
+  
+  body: data
+  }).then(res=>res.json())
+  .then(res => console.log(res));
+    
+  }
+  </script>
   </head>
   <body>
     <nav class="navbar navbar-dark bg-primary mb-4">
@@ -28,3 +45,10 @@
     </div>
   </body>
 </html>
+
+
+fetch('https://httpbin.org/post', {
+  
+
+
+

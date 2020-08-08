@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from googletrans import Translator
 
 from .models import Question, Choice
 
@@ -22,7 +24,7 @@ def detail(request, question_id):
 
 def results(request, question_id):
   question = get_object_or_404(Question, pk=question_id)
-  return render(request, 'polls/results.html', { 'question': question })
+  return render(request, 'polls/results.html', { 'question': question  })
 
 def vote(request, question_id):
     
@@ -52,4 +54,10 @@ def resultsData(request, obj):
     print(votedata)
     return JsonResponse(votedata, safe=False)
 
-
+@csrf_exempt
+def ace( request ):
+    temp=(request.POST.get('answer'))
+    speech_trans=Translator()
+    translated_output=speech_trans.translate(temp,dest='en')
+    print(translated_output)
+    return JsonResponse(translated_output.text,safe=False)
