@@ -1,13 +1,88 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="card text-center">
-  <div class="card-body">
-    <h1>Welcome To </h1>
-    <p>T</p>
+<div class="card text-center mb-3">
+  <div class="row">
+  <div class="col-md-12">
+  <div class="card-body mb-3">
+    <h1>Welcome </h1>
+    <br>
     <a class="btn btn-dark" href="{% url 'polls:index' %}">
-        View Available Questions</a
-      >
+        Analyze Objective Questions</a>
   </div>
   </div>
+  </div>
+  </div>
+
+
+  <div class="container mb-4">
+  	<form method="POST">
+  		{% csrf_token %}
+  		<h2>Enter text</h2>
+  		<input type="text" name="">
+  		<input class="btn btn-primary" type="submit" name="">
+  	</form>
+  	
+  </div>
+
+<div class="card text-center">
+<div class="row">
+  <div class="col-md-12">
+  
+  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</div>
+</div>
+</div>
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+window.onload = function() {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	exportEnabled: true,
+	animationEnabled: true,
+	title: {
+		text: "Kisan Vikas Yojna"
+	},
+	textContent: {
+		text: "mrngreglm"
+	},
+
+
+	data: [{
+		type: "pie",
+		startAngle: 25,
+		toolTipContent: "<b>{label}</b>: {y}%",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}%",
+		dataPoints: [
+			{ y: 51.08, label: "Chrome" },
+			{ y: 27.34, label: "Internet Explorer" },
+			{ y: 10.62, label: "Firefox" },
+			{ y: 5.02, label: "Microsoft Edge" },
+			{ y: 4.07, label: "Safari" },
+			{ y: 1.22, label: "Opera" },
+			{ y: 0.44, label: "Others" }
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
 {% endblock %}
