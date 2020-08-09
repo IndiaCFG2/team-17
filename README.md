@@ -1,0 +1,35 @@
+# team-17
+
+ANALYSIVIS
+
+Introduction:
+In this project we're creating a dashboard for the Civis Innovation Foundation to help them better track and easily analyse the feedback 
+they receive from people on the various government policies .
+
+Table Of Contents:
+1. Introduction
+2.Technologies
+3. General Info
+4. Solution 
+
+1.Introduction:
+In this project we're creating a dashboard for the Civis Innovation Foundation to help them better track and easily analyse the feedback 
+they receive from people on the various government policies .
+
+2.Technologies:
+The dashboard is created with
+-Django
+-Bootsrap 4
+-Jquery
+-Javascript
+
+
+3. Setup:
+To run this project locally install django and after downloading the project, run the following commands on the terminal
+- cd demo1
+- python manage.py runserver
+
+4. Solution:
+The dashboard designed can be used to take inputs from the end users in three ways
+1. An answer to a set of objective questions
+
