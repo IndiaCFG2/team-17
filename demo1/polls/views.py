@@ -5,9 +5,14 @@ from django.urls import reverse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from googletrans import Translator
+import pickle
+from sklearn.feature_extraction.text import CountVectorizer
+import pandas as pd
+import re
+
 
 from .models import Question, Choice
-
+model1 = pickle.load(open('C:/Users/akpsb/CFG/team-17/demo1/polls/model1.pkl', 'rb'))
 
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
@@ -60,4 +65,29 @@ def ace( request ):
     speech_trans=Translator()
     translated_output=speech_trans.translate(temp,dest='en')
     print(translated_output)
+    res=classify(translated_output.text)
+    print(res)
+    
+
     return JsonResponse(translated_output.text,safe=False)
+
+
+def preprocess_text(x):
+    clean_x=[]
+    for i in x:
+        st=str(i).lower()
+        clean_sent=re.sub(r'\'','',st)
+        clean_sent = re.sub(r'\W',' ',clean_sent)
+        clean_sent = re.sub(r'\s+',' ',clean_sent)
+        clean_x.append(clean_sent)
+    return clean_x
+
+def classify(test_input):
+    test_item=pd.DataFrame([test_input])
+    test_item=test_item[0]
+    test_item=preprocess_text(test_item)
+    cv=CountVectorizer()
+    new_cv=cv.transform(test_item).toarray()
+    if model1.predict(new_cv)[0]==0:
+        return "-ve"
+    return "+ve"
