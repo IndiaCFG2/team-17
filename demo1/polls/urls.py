@@ -9,5 +9,6 @@ urlpatterns = [
     path('<int:question_id>/results/', views.results, name='results'),
     path('<int:question_id>/vote/', views.vote, name='vote'),
     path('resultsdata/<str:obj>/', views.resultsData, name="resultsdata"),
-    path('ace',views.ace, name="ace"),    
+    path('ace',views.ace, name="ace"),
+    path('speech',views.speech, name="speech") 
 ]

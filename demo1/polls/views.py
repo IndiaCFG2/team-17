@@ -9,6 +9,7 @@ import pickle
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 import re
+import os
 
 
 from .models import Question, Choice
@@ -61,7 +62,8 @@ def resultsData(request, obj):
 
 @csrf_exempt
 def ace( request ):
-    temp=(request.POST.get('answer'))
+    temp=(request.POST.get('input'))
+    print(request.POST.get('input'))
     speech_trans=Translator()
     translated_output=speech_trans.translate(temp,dest='en')
     print(translated_output)
@@ -91,3 +93,28 @@ def classify(test_input):
     if model1.predict(new_cv)[0]==0:
         return "-ve"
     return "+ve"
+
+
+
+@csrf_exempt
+def speech(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        """  fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        print(uploaded_file_url)
+        """
+        s=os.getcwd()
+        sound =AudioSegment.from_file(uploaded_file_url)
+        sound.export("temporary_output.wav",format="wav")
+        audio="temporary_output.wav"
+        r=sr.Recognizer()
+        with sr.AudioFile(audio) as source:
+            audio1=r.record(source)
+            text=r.recognize_google(audio1)
+            speech_trans=Translator()
+            translated_output=speech_trans.translate(text,dest='en')
+            print(translated_output.text)
+            output=translated_output.text
+            return JsonResponse(output,safe=False)
