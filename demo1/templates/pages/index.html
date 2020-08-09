@@ -14,29 +14,35 @@
   </div>
   </div>
 
+  <div class="row">
+<div class="col-6">
 
   <form method="post" action='/polls/speech' enctype="multipart/form-data">
     {%csrf_token%}
     <div>
-      <label for="file">Choose file to upload</label>
+      <label for="file">Upload an audio file.</label>
       <input type="file" accept="audio/*" id="file" name="myfile" multiple>
     </div>
     <div>
-      <button>Submit</button>
+      <button  type="submit" class="btn btn-success mx-auto" >Submit</button>
     </div>
    </form>
+</div>
 
 
 
-  <div class="container mb-4">
 
-	  <form action="/polls/ace" method="post">
+  <div class="container col-6 mb-4">
+
+	  <div >
 		<label for="input">Enter Text </label>
-		<input id="input" type="text" name="input" >
-		<input class="btn btn-primary" type="submit">
-	</form>
+		<!-- <input id="input" type="" name="input" > -->
+		<input id="input" name="input"> </input>
+		<input class="btn btn-primary" onclick="renderChart()" type="submit">
+	  </div>
   	
   </div>
+</div>
 
 <div class="card text-center">
 <div class="row">
@@ -57,7 +63,20 @@
 <script>
 window.onload = function() {
 
-var chart = new CanvasJS.Chart("chartContainer", {
+console.log('hi');
+
+};
+
+function renderChart(){
+	var data;
+	(function async () {
+        
+		await fetch('/data').then(res=>res.json())
+  .then(res => { data= res.json();console.log(data)});
+
+	})();
+
+	var chart = new CanvasJS.Chart("chartContainer", {
 	theme: "light2", // "light1", "light2", "dark1", "dark2"
 	exportEnabled: true,
 	animationEnabled: true,
@@ -78,21 +97,17 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		indexLabelFontSize: 16,
 		indexLabel: "{label} - {y}%",
 		dataPoints: [
-			{ y: 51.08, label: "Chrome" },
-			{ y: 27.34, label: "Internet Explorer" },
-			{ y: 10.62, label: "Firefox" },
-			{ y: 5.02, label: "Microsoft Edge" },
-			{ y: 4.07, label: "Safari" },
-			{ y: 1.22, label: "Opera" },
-			{ y: 0.44, label: "Others" }
+			{ y: data['yes'], label: "Positive" },
+			{ y: data['no'], label: "Negative" },
+			{ y: data['neutral'], label: "Neutral" },
 		]
 	}]
 });
 chart.render();
+};
 
-}
 
-function send(){
+/* function send(){
 var data = new FormData();
     data.append( "answer", "Hai how are you" );
 
@@ -106,7 +121,7 @@ var data = new FormData();
   .then(res => console.log(res));
 
 }
-
+ */
 </script>
 </head>
 <body>
