@@ -14,6 +14,146 @@
   </div>
   </div>
 
+  <script>
+   /*  const player = document.getElementById('player');
+  
+    const handleSuccess = function(stream) {
+      if (window.URL) {
+        player.srcObject = stream;
+      } else {
+        player.src = stream;
+      }
+
+
+    };
+  
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+        .then(handleSuccess); */
+
+
+        const record = document.querySelector('.record');
+const stop = document.querySelector('.stop');
+const soundClips = document.querySelector('.sound-clips');
+
+
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+   console.log('getUserMedia supported.');
+   navigator.mediaDevices.getUserMedia (
+      // constraints - only audio needed for this app
+      {
+         audio: true
+      })
+
+      // Success callback
+      .then(function(stream) {
+ 
+        
+      })
+
+      // Error callback
+      .catch(function(err) {
+         console.log('The following getUserMedia error occured: ' + err);
+      }
+   );
+} else {
+   console.log('getUserMedia not supported on your browser!');
+}
+
+const mediaRecorder = new MediaRecorder(stream);
+
+
+record.onclick = function() {
+  mediaRecorder.start();
+  console.log(mediaRecorder.state);
+  console.log("recorder started");
+  record.style.background = "red";
+  record.style.color = "black";
+}
+
+let chunks = [];
+
+mediaRecorder.ondataavailable = function(e) {
+  chunks.push(e.data);
+}
+
+stop.onclick = function() {
+  mediaRecorder.stop();
+  console.log(mediaRecorder.state);
+  console.log("recorder stopped");
+  record.style.background = "";
+  record.style.color = "";
+}
+
+
+
+
+  </script>
+
+
+
+<!-- 
+<a id="download">Download</a>
+<button id="stop">Stop</button>
+<script>
+  let shouldStop = false;
+  let stopped = false;
+  const downloadLink = document.getElementById('download');
+  const stopButton = document.getElementById('stop');
+
+  stopButton.addEventListener('click', function() {
+    shouldStop = true;
+  });
+
+  const handleSuccess = function(stream) {
+    const options = {mimeType: 'audio/webm'};
+    const recordedChunks = [];
+    const mediaRecorder = new MediaRecorder(stream, options);
+
+    mediaRecorder.addEventListener('dataavailable', function(e) {
+      if (e.data.size > 0) {
+        recordedChunks.push(e.data);
+      }
+
+      if(shouldStop === true && stopped === false) {
+        mediaRecorder.stop();
+        stopped = true;
+      }
+    });
+
+    mediaRecorder.addEventListener('stop', function() {
+      downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+      downloadLink.download = 'acetest.wav';
+    });
+
+    mediaRecorder.start();
+  };
+
+  navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+      .then(handleSuccess);
+
+</script> -->
+
+
+<!-- 
+<input type="file" accept="audio/*" capture id="recorder">
+<audio id="player" controls></audio>
+<script>
+  const recorder = document.getElementById('recorder');
+  const player = document.getElementById('player');
+
+  recorder.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const url = URL.createObjectURL(file);
+    // Do something with the audio file.
+    player.src = url;
+  });
+</script>
+ -->
+
+
+
+
+
   <div class="row">
 <div class="col-6">
 
@@ -69,10 +209,10 @@ console.log('hi');
 
 function renderChart(){
 	var data;
-	(function async () {
+	(function (){
         
-		await fetch('/data').then(res=>res.json())
-  .then(res => { data= res.json();console.log(data)});
+		fetch('/data').then(res=>res.json())
+  .then(res => { data= res.json()});
 
 	})();
 
@@ -97,9 +237,9 @@ function renderChart(){
 		indexLabelFontSize: 16,
 		indexLabel: "{label} - {y}%",
 		dataPoints: [
-			{ y: data['yes'], label: "Positive" },
-			{ y: data['no'], label: "Negative" },
-			{ y: data['neutral'], label: "Neutral" },
+			{ y: 51.08, label: "Positive" },
+			{ y: 27.34, label: "Negative" },
+			{ y: 10.62, label: "Neutral" },
 		]
 	}]
 });

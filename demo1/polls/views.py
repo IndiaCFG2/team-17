@@ -142,7 +142,7 @@ def data(request):
             p+=1
         else:
             n+=1
-    sent=[p,n]
+    sent={'yes':p,"no":n}
     r = Rake() # Uses stopwords for english from NLTK, and all puntuation characters.
 
     r.extract_keywords_from_text(b)
@@ -151,7 +151,7 @@ def data(request):
 
     print(ranked) # To get keyword phrases ranked highest to lowest.
 
-    return JsonResponse([sent,ranked],safe=False)
+    return JsonResponse(sent,safe=False)
 
 
     
