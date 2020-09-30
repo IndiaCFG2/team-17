@@ -38,3 +38,5 @@ The dashboard designed can be used to take inputs from the end users in three wa
 -Taking a voice input in any language, converting it to text and then converting this text to english text using the google translate api.
 3. Analysing this data using an ML model and depicting it visually on the dashboard.
 
+
+##### The code ("Code") in this repository was created solely by the student teams during a coding competition hosted by JPMorgan Chase Bank, N.A. ("JPMC").						JPMC did not create or contribute to the development of the Code.  This Code is provided AS IS and JPMC makes no warranty of any kind, express or implied, as to the Code,						including but not limited to, merchantability, satisfactory quality, non-infringement, title or fitness for a particular purpose or use.
